@@ -1,0 +1,16 @@
+{
+  "name": "new-leash-of-life-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site served by Express for Heroku deployment",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
