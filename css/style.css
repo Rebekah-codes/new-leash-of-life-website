@@ -4,6 +4,8 @@
 
 /* Colours */
 :root {
+  --header-offset: 72px;
+
   --clr-bg: #ffffff;
   --clr-bg-alt: #f7f7f7;
 
@@ -101,6 +103,9 @@ header {
 nav {
   background: var(--clr-bg);
   border-bottom: 1px solid var(--clr-border);
+  position: sticky;
+  top: var(--header-offset);
+  z-index: 1050;
 }
 
 .nav-links {

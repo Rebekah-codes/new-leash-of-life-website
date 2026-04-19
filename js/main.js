@@ -28,6 +28,15 @@ function normalizeComponentPaths(element) {
   });
 }
 
+function updateStickyOffsets() {
+  const header = document.getElementById("site-header");
+  const headerHeight = header ? header.offsetHeight : 0;
+  document.documentElement.style.setProperty(
+    "--header-offset",
+    `${headerHeight}px`,
+  );
+}
+
 async function loadComponent(id, file) {
   const element = document.getElementById(id);
   if (element) {
@@ -36,6 +45,7 @@ async function loadComponent(id, file) {
       const html = await response.text();
       element.innerHTML = html;
       normalizeComponentPaths(element);
+      updateStickyOffsets();
     } catch (error) {
       console.error(`Error loading ${file}:`, error);
     }
@@ -45,6 +55,9 @@ async function loadComponent(id, file) {
 loadComponent("site-header", "header.html");
 loadComponent("site-nav", "nav.html");
 loadComponent("site-footer", "footer.html");
+
+document.addEventListener("DOMContentLoaded", updateStickyOffsets);
+window.addEventListener("resize", updateStickyOffsets);
 
 // ------------------------------
 // HOMEPAGE DATA
