@@ -19,6 +19,20 @@ loadComponent("site-header", "header.html");
 loadComponent("site-nav", "nav.html");
 loadComponent("site-footer", "footer.html");
 
+// ------------------------------
+// MOBILE MENU TOGGLE
+// ------------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const navContainer = document.querySelector(".nav-container");
+
+    if (hamburger && navContainer) {
+        hamburger.addEventListener("click", () => {
+            navContainer.classList.toggle("open");
+        });
+    }
+});
 
 // ------------------------------
 // SHOP PAGE LOGIC
