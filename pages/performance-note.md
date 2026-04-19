@@ -7,6 +7,7 @@ Your site is deployed on Heroku using the herokuapp.com domain. Heroku's free an
 ## Lighthouse Warning: "Modern HTTP"
 
 This warning appears because:
+
 - **Root Cause:** The herokuapp.com domain negotiates only HTTP/1.1
 - **Not Code-Fixable:** Heroku controls the protocol negotiation at the edge
 - **To Clear This Warning:** You need a custom domain + CDN (see below)
