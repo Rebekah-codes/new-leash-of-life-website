@@ -1,0 +1,223 @@
+/* ------------------------------
+   DESIGN SYSTEM
+--------------------------------*/
+
+/* Colours */
+:root {
+    --clr-bg: #ffffff;
+    --clr-bg-alt: #f7f7f7;
+
+    --clr-text: #333333;
+    --clr-text-light: #666666;
+
+    --clr-primary: #ff7f50; /* Coral – friendly + modern */
+    --clr-primary-dark: #e56f45;
+
+    --clr-accent: #4c9aff; /* Soft blue accent */
+    --clr-border: #e0e0e0;
+
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    --transition: 0.25s ease;
+}
+
+/* Typography */
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: var(--clr-text);
+}
+
+p {
+    color: var(--clr-text-light);
+}
+
+/* Layout */
+.container {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* Spacing scale */
+.spacing-xs { margin: 0.25rem; }
+.spacing-sm { margin: 0.5rem; }
+.spacing-md { margin: 1rem; }
+.spacing-lg { margin: 2rem; }
+.spacing-xl { margin: 4rem; }
+
+/* ------------------------------
+   HEADER + NAV
+--------------------------------*/
+
+header {
+    background: var(--clr-bg);
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(1200px, 90%);
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--clr-text);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+nav {
+    background: var(--clr-bg);
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 1rem;
+    margin: 0;
+    justify-content: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--clr-text);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--clr-primary);
+}
+
+/* ------------------------------
+   BUTTONS
+--------------------------------*/
+
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--clr-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--clr-primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--clr-bg-alt);
+    color: var(--clr-text);
+    border: 1px solid var(--clr-border);
+}
+
+.btn-secondary:hover {
+    background: var(--clr-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ------------------------------
+   SHOP GRID + PRODUCT CARDS
+--------------------------------*/
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.product-card {
+    background: var(--clr-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.product-name {
+    margin: 1rem 0 0.5rem;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--clr-primary);
+}
+
+/* ------------------------------
+   PRODUCT PAGE
+--------------------------------*/
+
+.product-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.product-details img {
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+@media (max-width: 768px) {
+    .product-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+
+footer {
+    background: var(--clr-bg-alt);
+    padding: 2rem 0;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--clr-text-light);
+}
