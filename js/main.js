@@ -295,7 +295,12 @@ function initCartPage() {
   const cart = getCart();
 
   if (cart.length === 0) {
-    container.innerHTML = "<p>Your cart is empty.</p>";
+    container.innerHTML = `
+      <p>Your cart is empty.</p>
+      <div class="cart-empty-actions">
+        <a href="${resolveSitePath("/pages/shop.html")}" class="btn-primary">Continue Shopping</a>
+      </div>
+    `;
     const summary = document.getElementById("cart-summary");
     if (summary) summary.innerHTML = "";
     return;
@@ -341,3 +346,5 @@ function initCartPage() {
         `;
   }
 }
+
+document.addEventListener("DOMContentLoaded", initCartPage);
