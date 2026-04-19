@@ -13,7 +13,25 @@
     <!-- Navigation -->
     <nav id="site-nav"></nav>
 
+    <section class="promo-shell">
+      <div class="promo-bar container">
+        <p class="promo-title">Today&apos;s Offers</p>
+        <ul id="promo-offers-list" class="promo-offers-list"></ul>
+      </div>
+      <div class="offer-slider container">
+        <div id="offer-slider-track" class="offer-slider-track"></div>
+      </div>
+    </section>
+
     <main class="container home-page">
+      <section class="pet-switcher">
+        <div class="section-heading">
+          <h2>Shop by Pet Type</h2>
+          <a href="pages/shop.html">View all products</a>
+        </div>
+        <div id="pet-type-switcher" class="pet-switch-grid"></div>
+      </section>
+
       <section class="home-hero">
         <div class="home-hero-content">
           <p class="eyebrow">Trusted by UK pet retailers</p>
@@ -55,23 +73,48 @@
         <div class="deal-grid" id="top-deals-grid"></div>
       </section>
 
+      <section class="section-block">
+        <div class="section-heading">
+          <h2>New Lines</h2>
+          <a href="pages/shop.html?collection=New%20Lines">See all new lines</a>
+        </div>
+        <div class="product-grid" id="new-lines-grid"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <h2>Clearance Picks</h2>
+          <a href="pages/shop.html?collection=Clearance">Browse clearance</a>
+        </div>
+        <div class="product-grid" id="clearance-grid"></div>
+      </section>
+
       <section class="section-block spotlight-block">
         <div class="section-heading">
           <h2>Category Spotlight</h2>
           <a href="pages/categories.html">View all categories</a>
         </div>
         <div class="spotlight-grid">
-          <a href="pages/categories.html" class="spotlight-tile toy-tile">
-            <h3>Toys</h3>
-            <p>Interactive fun for every energy level.</p>
+          <a
+            href="pages/shop.html?category=Food%20%26%20Treats"
+            class="spotlight-tile toy-tile"
+          >
+            <h3>Food &amp; Treats</h3>
+            <p>Daily nutrition and reward favourites.</p>
           </a>
-          <a href="pages/categories.html" class="spotlight-tile treat-tile">
-            <h3>Treats</h3>
-            <p>Tasty training rewards and natural bites.</p>
+          <a
+            href="pages/shop.html?category=Accessories"
+            class="spotlight-tile treat-tile"
+          >
+            <h3>Accessories</h3>
+            <p>Leads, collars, bowls, and everyday essentials.</p>
           </a>
-          <a href="pages/categories.html" class="spotlight-tile care-tile">
-            <h3>Care & Hygiene</h3>
-            <p>Daily wellbeing from nose to tail.</p>
+          <a
+            href="pages/shop.html?category=Health%20%26%20Hygiene"
+            class="spotlight-tile care-tile"
+          >
+            <h3>Health &amp; Hygiene</h3>
+            <p>Wellbeing products for clean and healthy pets.</p>
           </a>
         </div>
       </section>
@@ -88,6 +131,25 @@
         <h2>Need help finding the right products?</h2>
         <p>Our team is here to help you choose trusted options for your pet.</p>
         <a href="pages/contact.html" class="btn-primary">Contact us</a>
+      </section>
+
+      <section class="trust-strip" aria-label="Shopping benefits">
+        <article class="trust-item">
+          <h3>Free Delivery</h3>
+          <p>Free UK delivery over £39.</p>
+        </article>
+        <article class="trust-item">
+          <h3>Secure Checkout</h3>
+          <p>Protected payment and trusted processing.</p>
+        </article>
+        <article class="trust-item">
+          <h3>Friendly Support</h3>
+          <p>Helpful customer care when you need it.</p>
+        </article>
+        <article class="trust-item">
+          <h3>Easy Returns</h3>
+          <p>Simple returns process for peace of mind.</p>
+        </article>
       </section>
     </main>
 

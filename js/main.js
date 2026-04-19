@@ -90,9 +90,170 @@ const blogPosts = [
   },
 ];
 
+const promoOffers = [
+  {
+    label: "Free delivery over £39",
+    url: "/pages/shipping.html",
+  },
+  {
+    label: "20% off selected treats this week",
+    url: "/pages/shop.html?collection=Offers",
+  },
+  {
+    label: "New spring picks now live",
+    url: "/pages/shop.html?collection=New%20Lines",
+  },
+  {
+    label: "Clearance bundles while stock lasts",
+    url: "/pages/shop.html?collection=Clearance",
+  },
+];
+
+const petTypes = ["Dog", "Cat", "Small Pet", "Bird"];
+
+let offerSliderInterval;
+
+function getCollectionTag(product) {
+  if (!Array.isArray(product.collections) || product.collections.length === 0) {
+    return "Featured";
+  }
+
+  if (product.collections.includes("Price Drop")) return "Price Drop";
+  if (product.collections.includes("Offers")) return "Offer";
+  if (product.collections.includes("New Lines")) return "New";
+  if (product.collections.includes("Clearance")) return "Clearance";
+  return product.collections[0];
+}
+
+function getStars(rating) {
+  const safeRating = typeof rating === "number" ? rating : 4;
+  const fullStars = Math.round(safeRating);
+  return "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
+}
+
+function createProductCardHTML(product, detailLabel = "View Details") {
+  const oldPriceMarkup = product.oldPrice
+    ? `<p class="product-price-previous">Was £${product.oldPrice.toFixed(2)}</p>`
+    : "";
+
+  const unitPriceMarkup = product.unitPrice
+    ? `<p class="product-unit-price">${product.unitPrice}</p>`
+    : "";
+
+  const reviewCount = typeof product.reviews === "number" ? product.reviews : 0;
+  const rating =
+    typeof product.rating === "number" ? product.rating.toFixed(1) : "4.0";
+
+  return `
+    <article class="product-card">
+      <span class="product-badge">${getCollectionTag(product)}</span>
+      <img src="${resolveSitePath(product.image)}" alt="${product.name}" class="product-image">
+
+      <div class="product-info">
+        <h3 class="product-name">${product.name}</h3>
+        <p class="product-rating" aria-label="Rating ${rating} out of 5">${getStars(product.rating)} <span>(${reviewCount})</span></p>
+        <p class="product-price">£${product.price.toFixed(2)}</p>
+        ${oldPriceMarkup}
+        ${unitPriceMarkup}
+      </div>
+
+      <a href="${resolveSitePath(`/pages/product.html?id=${product.id}`)}" class="btn-secondary">${detailLabel}</a>
+      <button type="button" class="btn-primary" data-add-to-cart="true" data-product-id="${product.id}">Add to Cart</button>
+    </article>
+  `;
+}
+
+function renderPromoBar() {
+  const list = document.getElementById("promo-offers-list");
+  if (!list) return;
+
+  list.innerHTML = promoOffers
+    .slice(0, 3)
+    .map(
+      (offer) =>
+        `<li><a href="${resolveSitePath(offer.url)}">${offer.label}</a></li>`,
+    )
+    .join("");
+}
+
+function renderOfferSlider() {
+  const slider = document.getElementById("offer-slider-track");
+  if (!slider) return;
+
+  slider.innerHTML = promoOffers
+    .map(
+      (offer, index) => `
+      <a class="offer-slide${index === 0 ? " is-active" : ""}" href="${resolveSitePath(offer.url)}">
+        <span class="offer-slide-tag">Live Offer</span>
+        <strong>${offer.label}</strong>
+      </a>
+    `,
+    )
+    .join("");
+}
+
+function startOfferSlider() {
+  const slides = Array.from(document.querySelectorAll(".offer-slide"));
+  if (slides.length < 2) return;
+
+  let activeIndex = 0;
+  if (offerSliderInterval) clearInterval(offerSliderInterval);
+
+  offerSliderInterval = setInterval(() => {
+    slides[activeIndex].classList.remove("is-active");
+    activeIndex = (activeIndex + 1) % slides.length;
+    slides[activeIndex].classList.add("is-active");
+  }, 3800);
+}
+
+function renderPetTypeSwitcher() {
+  const container = document.getElementById("pet-type-switcher");
+  if (!container) return;
+
+  container.innerHTML = petTypes
+    .map(
+      (petType) =>
+        `<a class="pet-switch-chip" href="${resolveSitePath(`/pages/shop.html?pet=${encodeURIComponent(petType)}`)}">${petType}</a>`,
+    )
+    .join("");
+}
+
+function renderHomeCollectionRail(elementId, collection, emptyText) {
+  const grid = document.getElementById(elementId);
+  if (!grid || typeof products === "undefined") return;
+
+  const collectionItems = products
+    .filter((product) =>
+      Array.isArray(product.collections)
+        ? product.collections.includes(collection)
+        : false,
+    )
+    .slice(0, 3);
+
+  if (collectionItems.length === 0) {
+    grid.innerHTML = `<p>${emptyText}</p>`;
+    return;
+  }
+
+  grid.innerHTML = collectionItems
+    .map((product) => createProductCardHTML(product, "View product"))
+    .join("");
+}
+
 function renderHomeBrands() {
   const grid = document.getElementById("brand-grid");
   if (!grid) return;
+
+  if (typeof getBrands === "function") {
+    const brandLinks = getBrands();
+    grid.innerHTML = brandLinks
+      .map(
+        (brand) =>
+          `<a class="brand-tile" href="${resolveSitePath(`/pages/shop.html?brand=${encodeURIComponent(brand)}`)}">${brand}</a>`,
+      )
+      .join("");
+    return;
+  }
 
   grid.innerHTML = homeBrands
     .map((brand) => `<article class="brand-tile">${brand}</article>`)
@@ -103,21 +264,35 @@ function renderHomeDeals() {
   const grid = document.getElementById("top-deals-grid");
   if (!grid || typeof products === "undefined") return;
 
-  const dealTags = ["Top Deal", "Best Seller", "Limited"];
-  const topDeals = products.slice(0, 3);
+  const topDeals = products
+    .filter((product) =>
+      Array.isArray(product.collections)
+        ? product.collections.includes("Offers") ||
+          product.collections.includes("Price Drop")
+        : false,
+    )
+    .slice(0, 3);
 
-  grid.innerHTML = topDeals
+  const fallbackDeals = topDeals.length > 0 ? topDeals : products.slice(0, 3);
+
+  grid.innerHTML = fallbackDeals
     .map((product, index) => {
       const teaser = product.description.slice(0, 72);
       const teaserText =
         product.description.length > 72 ? `${teaser}...` : teaser;
+      const tag =
+        Array.isArray(product.collections) && product.collections.length > 0
+          ? product.collections[0]
+          : ["Top Deal", "Best Seller", "Limited"][index] || "Deal";
 
       return `
         <article class="deal-card">
-          <p class="deal-tag">${dealTags[index] || "Deal"}</p>
+          <p class="deal-tag">${tag}</p>
           <h3>${product.name}</h3>
           <p>${teaserText}</p>
           <p class="product-price">£${product.price.toFixed(2)}</p>
+          ${product.oldPrice ? `<p class="product-price-previous">Was £${product.oldPrice.toFixed(2)}</p>` : ""}
+          ${product.unitPrice ? `<p class="product-unit-price">${product.unitPrice}</p>` : ""}
           <a href="${resolveSitePath(`/pages/product.html?id=${product.id}`)}" class="btn-secondary">View deal</a>
         </article>
       `;
@@ -143,10 +318,23 @@ function renderHomeNews() {
 }
 
 function initHomePage() {
-  if (!document.querySelector(".home-page")) return;
   renderHomeBrands();
   renderHomeDeals();
+  renderHomeCollectionRail(
+    "new-lines-grid",
+    "New Lines",
+    "New lines are arriving soon.",
+  );
+  renderHomeCollectionRail(
+    "clearance-grid",
+    "Clearance",
+    "No clearance products available right now.",
+  );
   renderHomeNews();
+  renderPromoBar();
+  renderOfferSlider();
+  renderPetTypeSwitcher();
+  startOfferSlider();
 }
 
 document.addEventListener("DOMContentLoaded", initHomePage);
@@ -174,38 +362,31 @@ function renderProducts(list) {
   const grid = document.getElementById("product-grid");
   if (!grid) return;
 
-  grid.innerHTML = "";
+  grid.innerHTML = list
+    .map((product) => createProductCardHTML(product, "View Details"))
+    .join("");
+}
 
-  list.forEach((product) => {
-    const card = document.createElement("div");
-    card.classList.add("product-card");
-
-    card.innerHTML = `
-      <img src="${resolveSitePath(product.image)}" alt="${product.name}" class="product-image">
-
-            <div class="product-info">
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-price">£${product.price.toFixed(2)}</p>
-            </div>
-
-      <a href="${resolveSitePath(`/pages/product.html?id=${product.id}`)}" class="btn-secondary">View Details</a>
-      <button type="button" class="btn-primary" data-add-to-cart="true" data-product-id="${product.id}">Add to Cart</button>
-        `;
-
-    grid.appendChild(card);
-  });
+function getShopQueryFilters() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    category: params.get("category"),
+    brand: params.get("brand"),
+    collection: params.get("collection"),
+    pet: params.get("pet"),
+  };
 }
 
 function populateCategories() {
   const dropdown = document.getElementById("category-filter");
   if (!dropdown) return;
 
-  dropdown.innerHTML = '<option value="all">All Categories</option>';
+  dropdown.innerHTML = '<option value="all">All Departments</option>';
 
   const categories = getCategories();
 
   categories
-    .filter((cat) => cat !== "All")
+    .filter((cat) => cat !== "all")
     .forEach((cat) => {
       const option = document.createElement("option");
       option.value = cat;
@@ -216,18 +397,39 @@ function populateCategories() {
 
 function applyFilters() {
   let filtered = [...products];
+  const queryFilters = getShopQueryFilters();
+
+  const categoryDropdown = document.getElementById("category-filter");
+  const selectedCategory =
+    categoryDropdown && categoryDropdown.value !== "all"
+      ? categoryDropdown.value
+      : queryFilters.category;
+
+  if (selectedCategory && selectedCategory !== "all") {
+    filtered = filtered.filter((p) => p.category === selectedCategory);
+  }
+
+  if (queryFilters.brand) {
+    filtered = filtered.filter((p) => p.brand === queryFilters.brand);
+  }
+
+  if (queryFilters.collection) {
+    filtered = filtered.filter((p) =>
+      Array.isArray(p.collections)
+        ? p.collections.includes(queryFilters.collection)
+        : false,
+    );
+  }
+
+  if (queryFilters.pet) {
+    filtered = filtered.filter((p) => p.petType === queryFilters.pet);
+  }
 
   // Search
   const search = document.getElementById("search");
   if (search && search.value.trim() !== "") {
     const term = search.value.toLowerCase();
     filtered = filtered.filter((p) => p.name.toLowerCase().includes(term));
-  }
-
-  // Category
-  const category = document.getElementById("category-filter");
-  if (category && category.value !== "all") {
-    filtered = filtered.filter((p) => p.category === category.value);
   }
 
   // Sorting
@@ -247,13 +449,30 @@ function applyFilters() {
 function initShopPage() {
   if (!document.getElementById("product-grid")) return;
 
+  const queryFilters = getShopQueryFilters();
+
   populateCategories();
-  renderProducts(products);
+
+  const title = document.querySelector(".page-title");
+  if (title) {
+    if (queryFilters.category) title.textContent = queryFilters.category;
+    else if (queryFilters.brand)
+      title.textContent = `${queryFilters.brand} Products`;
+    else if (queryFilters.collection)
+      title.textContent = queryFilters.collection;
+    else if (queryFilters.pet)
+      title.textContent = `${queryFilters.pet} Essentials`;
+  }
+
+  const categoryFilter = document.getElementById("category-filter");
+  if (categoryFilter && queryFilters.category) {
+    categoryFilter.value = queryFilters.category;
+  }
+
+  applyFilters();
 
   document.getElementById("search").addEventListener("input", applyFilters);
-  document
-    .getElementById("category-filter")
-    .addEventListener("change", applyFilters);
+  categoryFilter.addEventListener("change", applyFilters);
   document
     .getElementById("sort-filter")
     .addEventListener("change", applyFilters);

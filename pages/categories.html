@@ -1,26 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Categories – New Leash of Life</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
     <header id="site-header"></header>
     <nav id="site-nav"></nav>
 
     <main class="container">
-        <h1>Product Categories</h1>
-        <div id="category-list">
-            <!-- Categories will be generated dynamically -->
+      <h1>Departments & Brands</h1>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <h2>Shop by Department</h2>
         </div>
+        <div class="brand-grid">
+          <a class="brand-tile" href="shop.html?collection=Price%20Drop"
+            >Price Drop</a
+          >
+          <a class="brand-tile" href="shop.html?category=Food%20%26%20Treats"
+            >Food &amp; Treats</a
+          >
+          <a class="brand-tile" href="shop.html?category=Accessories"
+            >Accessories</a
+          >
+          <a class="brand-tile" href="shop.html?category=Health%20%26%20Hygiene"
+            >Health &amp; Hygiene</a
+          >
+          <a class="brand-tile" href="shop.html?category=Litter%20%26%20Bedding"
+            >Litter &amp; Bedding</a
+          >
+          <a class="brand-tile" href="shop.html?collection=Seasonal"
+            >Seasonal</a
+          >
+          <a class="brand-tile" href="shop.html?collection=Offers">Offers</a>
+          <a class="brand-tile" href="shop.html?collection=New%20Lines"
+            >New Lines</a
+          >
+          <a class="brand-tile" href="shop.html?collection=Clearance"
+            >Clearance</a
+          >
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <h2>Popular Brands</h2>
+        </div>
+        <div class="brand-grid" id="brand-grid"></div>
+      </section>
     </main>
 
     <footer id="site-footer"></footer>
 
     <script src="../js/products.js"></script>
     <script src="../js/main.js"></script>
-</body>
+  </body>
 </html>
