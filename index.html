@@ -1,30 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Leash of Life – Home</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <!-- Header -->
     <header id="site-header"></header>
 
     <!-- Navigation -->
     <nav id="site-nav"></nav>
 
-    <main class="container">
-        <section class="hero">
-            <h1>Welcome to New Leash of Life</h1>
-            <p>Your trusted source for quality pet products.</p>
-            <a href="pages/shop.html" class="btn-primary">Shop Now</a>
-        </section>
+    <main class="container home-page">
+      <section class="home-hero">
+        <div class="home-hero-content">
+          <p class="eyebrow">Trusted by UK pet retailers</p>
+          <h1>Quality Pet Products, Fresh Deals, Happy Tails</h1>
+          <p>
+            Discover everyday essentials, trending toys, and seasonal
+            favourites, all in one place for pet lovers.
+          </p>
+          <div class="hero-actions">
+            <a href="pages/shop.html" class="btn-primary">Browse Products</a>
+            <a href="pages/categories.html" class="btn-secondary"
+              >Explore Categories</a
+            >
+          </div>
+        </div>
+        <aside class="home-hero-panel">
+          <h2>This Week's Highlights</h2>
+          <ul>
+            <li>Top rated toys and treats</li>
+            <li>New lines added every week</li>
+            <li>Fast UK dispatch on popular products</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <h2>Popular Brands</h2>
+          <a href="pages/categories.html">View all</a>
+        </div>
+        <div class="brand-grid" id="brand-grid"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <h2>Top Deals</h2>
+          <a href="pages/shop.html">Shop all deals</a>
+        </div>
+        <div class="deal-grid" id="top-deals-grid"></div>
+      </section>
+
+      <section class="section-block spotlight-block">
+        <div class="section-heading">
+          <h2>Category Spotlight</h2>
+          <a href="pages/categories.html">View all categories</a>
+        </div>
+        <div class="spotlight-grid">
+          <a href="pages/categories.html" class="spotlight-tile toy-tile">
+            <h3>Toys</h3>
+            <p>Interactive fun for every energy level.</p>
+          </a>
+          <a href="pages/categories.html" class="spotlight-tile treat-tile">
+            <h3>Treats</h3>
+            <p>Tasty training rewards and natural bites.</p>
+          </a>
+          <a href="pages/categories.html" class="spotlight-tile care-tile">
+            <h3>Care & Hygiene</h3>
+            <p>Daily wellbeing from nose to tail.</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section-block info-hub">
+        <div class="section-heading">
+          <h2>Information Hub</h2>
+          <a href="pages/blog.html">View all updates</a>
+        </div>
+        <div class="news-grid" id="home-news-grid"></div>
+      </section>
+
+      <section class="home-cta">
+        <h2>Need help finding the right products?</h2>
+        <p>Our team is here to help you choose trusted options for your pet.</p>
+        <a href="pages/contact.html" class="btn-primary">Contact us</a>
+      </section>
     </main>
 
     <!-- Footer -->
     <footer id="site-footer"></footer>
 
+    <script src="js/products.js"></script>
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>

@@ -47,6 +47,98 @@ loadComponent("site-nav", "nav.html");
 loadComponent("site-footer", "footer.html");
 
 // ------------------------------
+// HOMEPAGE DATA
+// ------------------------------
+
+const homeBrands = [
+  "KONG",
+  "Rosewood",
+  "Natures Menu",
+  "Hurtta",
+  "Ancol",
+  "SportsPet",
+];
+
+const blogPosts = [
+  {
+    title: "How to Choose the Right Toy for Your Dog",
+    date: "16 Apr 2026",
+    url: "/pages/blog.html",
+  },
+  {
+    title: "Spring Essentials for Active Pets",
+    date: "14 Apr 2026",
+    url: "/pages/blog.html",
+  },
+  {
+    title: "Top Seller Roundup: What Pet Owners Love",
+    date: "12 Apr 2026",
+    url: "/pages/blog.html",
+  },
+];
+
+function renderHomeBrands() {
+  const grid = document.getElementById("brand-grid");
+  if (!grid) return;
+
+  grid.innerHTML = homeBrands
+    .map((brand) => `<article class="brand-tile">${brand}</article>`)
+    .join("");
+}
+
+function renderHomeDeals() {
+  const grid = document.getElementById("top-deals-grid");
+  if (!grid || typeof products === "undefined") return;
+
+  const dealTags = ["Top Deal", "Best Seller", "Limited"];
+  const topDeals = products.slice(0, 3);
+
+  grid.innerHTML = topDeals
+    .map((product, index) => {
+      const teaser = product.description.slice(0, 72);
+      const teaserText =
+        product.description.length > 72 ? `${teaser}...` : teaser;
+
+      return `
+        <article class="deal-card">
+          <p class="deal-tag">${dealTags[index] || "Deal"}</p>
+          <h3>${product.name}</h3>
+          <p>${teaserText}</p>
+          <p class="product-price">£${product.price.toFixed(2)}</p>
+          <a href="${resolveSitePath(`/pages/product.html?id=${product.id}`)}" class="btn-secondary">View deal</a>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function renderHomeNews() {
+  const grid = document.getElementById("home-news-grid");
+  if (!grid) return;
+
+  grid.innerHTML = blogPosts
+    .map(
+      (post) => `
+      <article class="news-card">
+        <p class="news-date">${post.date}</p>
+        <h3>${post.title}</h3>
+        <a href="${resolveSitePath(post.url)}">Read more</a>
+      </article>
+    `,
+    )
+    .join("");
+}
+
+function initHomePage() {
+  if (!document.querySelector(".home-page")) return;
+  renderHomeBrands();
+  renderHomeDeals();
+  renderHomeNews();
+}
+
+document.addEventListener("DOMContentLoaded", initHomePage);
+
+// ------------------------------
 // MOBILE MENU TOGGLE
 // ------------------------------
 
