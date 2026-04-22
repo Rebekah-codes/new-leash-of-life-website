@@ -1,4 +1,7 @@
 // PRODUCT DATABASE
+const placeholderProductImage =
+  "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 480'%3E%3Crect width='640' height='480' rx='32' fill='%23f4efe7'/%3E%3Crect x='56' y='56' width='528' height='368' rx='24' fill='%23ffffff' stroke='%23d8c9ba' stroke-width='6' stroke-dasharray='18 14'/%3E%3Cpath d='M188 316l66-72 66 56 92-112 120 144' fill='none' stroke='%23846a5c' stroke-width='18' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='226' cy='170' r='34' fill='%23c8a98e'/%3E%3Ctext x='320' y='386' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='34' fill='%23846a5c'%3EPet product image%3C/text%3E%3C/svg%3E";
+
 const products = [
   {
     id: 1,
@@ -12,7 +15,7 @@ const products = [
     category: "Food & Treats",
     brand: "Natures Menu",
     collections: ["Offers", "Price Drop"],
-    image: "/assets/images/chicken-treats.jpg",
+    image: placeholderProductImage,
     description:
       "100% natural chicken treats with no additives for positive reinforcement.",
   },
@@ -28,7 +31,7 @@ const products = [
     category: "Food & Treats",
     brand: "KONG",
     collections: ["New Lines"],
-    image: "/assets/images/rope-toy.jpg",
+    image: placeholderProductImage,
     description: "Digestive-friendly complete food with salmon and botanicals.",
   },
   {
@@ -43,7 +46,7 @@ const products = [
     category: "Accessories",
     brand: "Ancol",
     collections: ["Offers"],
-    image: "/assets/images/plush-duck.jpg",
+    image: placeholderProductImage,
     description:
       "Comfort grip lead with reflective weave for safer evening walks.",
   },
@@ -59,7 +62,7 @@ const products = [
     category: "Accessories",
     brand: "Rosewood",
     collections: ["Clearance"],
-    image: "/assets/images/rope-toy.jpg",
+    image: placeholderProductImage,
     description:
       "Easy-wipe silicone feeding mat to keep floors clean at mealtimes.",
   },
@@ -75,7 +78,7 @@ const products = [
     category: "Health & Hygiene",
     brand: "Hurtta",
     collections: ["Seasonal"],
-    image: "/assets/images/chicken-treats.jpg",
+    image: placeholderProductImage,
     description:
       "Soothing wash formulated for pets with dry or irritated skin.",
   },
@@ -91,7 +94,7 @@ const products = [
     category: "Health & Hygiene",
     brand: "SportsPet",
     collections: ["Price Drop"],
-    image: "/assets/images/plush-duck.jpg",
+    image: placeholderProductImage,
     description:
       "Daily dental chews that help reduce plaque and freshen breath.",
   },
@@ -107,7 +110,7 @@ const products = [
     category: "Litter & Bedding",
     brand: "Rosewood",
     collections: ["Best Seller"],
-    image: "/assets/images/rope-toy.jpg",
+    image: placeholderProductImage,
     description:
       "Fast-clumping cat litter with long-lasting odour lock technology.",
   },
@@ -123,7 +126,7 @@ const products = [
     category: "Litter & Bedding",
     brand: "Natures Menu",
     collections: ["New Lines", "Offers"],
-    image: "/assets/images/plush-duck.jpg",
+    image: placeholderProductImage,
     description:
       "Soft donut-style bed designed for warmth, comfort, and deep sleep.",
   },

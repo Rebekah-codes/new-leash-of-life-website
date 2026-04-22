@@ -941,6 +941,16 @@ main.container:not(.home-page) > h1 {
   text-decoration: underline;
 }
 
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(76, 154, 255, 0.35);
+  outline-offset: 2px;
+}
+
 .brand-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(100px, 1fr));
@@ -1091,6 +1101,59 @@ main.container:not(.home-page) > h1 {
   font-size: 0.9rem;
 }
 
+.faq-accordion {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 1.1rem;
+  font-weight: 700;
+  color: var(--clr-text);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  float: right;
+  color: var(--clr-primary-dark);
+}
+
+.faq-item[open] summary::after {
+  content: "–";
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 1.1rem 1rem;
+}
+
+.about-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.about-cta-actions .btn-primary,
+.about-cta-actions .btn-secondary {
+  min-width: 160px;
+  text-align: center;
+}
+
 .home-cta {
   background: linear-gradient(130deg, #ff7f50 0%, #ff9a5f 100%);
   color: #fff;
@@ -1209,6 +1272,23 @@ main.container:not(.home-page) > h1 {
   .pet-switch-grid,
   .trust-strip {
     grid-template-columns: 1fr;
+  }
+
+  .faq-item summary {
+    padding: 0.95rem 1rem;
+  }
+
+  .faq-item p {
+    padding: 0 1rem 0.95rem;
+  }
+
+  .about-cta-actions {
+    flex-direction: column;
+  }
+
+  .about-cta-actions .btn-primary,
+  .about-cta-actions .btn-secondary {
+    width: 100%;
   }
 
   .footer-grid {

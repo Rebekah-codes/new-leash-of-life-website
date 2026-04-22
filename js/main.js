@@ -702,7 +702,7 @@ function initCartPage() {
 document.addEventListener("DOMContentLoaded", initCartPage);
 
 // Register service worker for offline support and smart caching
-if ("serviceWorker" in navigator) {
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
   navigator.serviceWorker
     .register("/sw.js")
     .then((registration) => {

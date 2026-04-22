@@ -1,4 +1,4 @@
-const CACHE_NAME = "new-leash-of-life-v1";
+const CACHE_NAME = "new-leash-of-life-v2";
 const urlsToCache = [
   "/",
   "/index.html",
@@ -8,6 +8,12 @@ const urlsToCache = [
   "/pages/shop.html",
   "/pages/cart.html",
   "/pages/about.html",
+  "/pages/categories.html",
+  "/pages/contact.html",
+  "/pages/faq.html",
+  "/pages/blog.html",
+  "/pages/returns.html",
+  "/pages/shipping.html",
 ];
 
 self.addEventListener("install", (event) => {
@@ -20,6 +26,21 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") {
+    return;
+  }
+
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+          return response;
+        })
+        .catch(() => caches.match(event.request)),
+    );
     return;
   }
 

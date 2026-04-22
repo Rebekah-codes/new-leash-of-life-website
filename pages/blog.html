@@ -1,23 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog – New Leash of Life</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
     <header id="site-header"></header>
     <nav id="site-nav"></nav>
 
     <main class="container">
-        <h1>Blog</h1>
-        <p>Articles and updates coming soon.</p>
+      <section class="section-block">
+        <div class="section-heading">
+          <h1>Blog</h1>
+        </div>
+        <p>
+          Seasonal guides, product picks, and quick updates from the shop floor.
+        </p>
+      </section>
+
+      <section class="section-block" aria-labelledby="blog-latest-heading">
+        <div class="section-heading">
+          <h2 id="blog-latest-heading">Latest articles</h2>
+        </div>
+        <div class="news-grid">
+          <article class="news-card">
+            <p class="news-date">16 Apr 2026</p>
+            <h3>How to Choose the Right Toy for Your Dog</h3>
+            <p>
+              A quick guide to matching chew strength, play style, and size so
+              your next toy actually lasts.
+            </p>
+            <a href="#toy-guide">Read article</a>
+          </article>
+          <article class="news-card">
+            <p class="news-date">14 Apr 2026</p>
+            <h3>Spring Essentials for Active Pets</h3>
+            <p>
+              The practical extras we recommend when walks get longer and
+              outdoor play starts picking up.
+            </p>
+            <a href="#spring-essentials">Read article</a>
+          </article>
+          <article class="news-card">
+            <p class="news-date">12 Apr 2026</p>
+            <h3>Top Seller Roundup: What Pet Owners Love</h3>
+            <p>
+              A snapshot of the products customers are reaching for the most
+              right now.
+            </p>
+            <a href="#top-sellers">Read article</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" aria-labelledby="blog-highlights-heading">
+        <div class="section-heading">
+          <h2 id="blog-highlights-heading">Quick reads</h2>
+        </div>
+        <div class="deal-grid">
+          <article class="deal-card" id="toy-guide">
+            <h3>Chew, fetch, or puzzle?</h3>
+            <p>
+              Pick toys by energy level first, then narrow by material and
+              durability for the best fit.
+            </p>
+          </article>
+          <article class="deal-card" id="spring-essentials">
+            <h3>What we pack for spring walks</h3>
+            <p>
+              Lead, treats, cleanup supplies, and a water break are the simple
+              essentials that make a big difference.
+            </p>
+          </article>
+          <article class="deal-card" id="top-sellers">
+            <h3>Why top sellers keep coming back</h3>
+            <p>
+              Reliable price points, everyday usefulness, and easy-to-love
+              designs are what keep these items at the top.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
 
     <footer id="site-footer"></footer>
 
     <script src="../js/main.js"></script>
-</body>
+  </body>
 </html>
